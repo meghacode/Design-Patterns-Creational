@@ -1,3 +1,4 @@
+import Builder.LunchOrder;
 import Singleton.DbSingleton;
 import Singleton.DbSingletonLazy;
 import Singleton.ThreadSafeSingleton;
@@ -45,6 +46,17 @@ public class Main {
         System.out.println(threadSafeSingleton);
         System.out.println(threadSafeSingleton1);
 
+        //Builder Example
+
+        LunchOrder.Builder builder = new LunchOrder.Builder();
+        builder.bread("Wheat").meat("Chicken").dressing("salad").condiments("lettuce");
+
+        LunchOrder lunchOrder = builder.build();
+
+        System.out.println(lunchOrder.getBread());
+        System.out.println(lunchOrder.getMeat());
+        System.out.println(lunchOrder.getCondiments());
+        System.out.println(lunchOrder.getDressing());
 
 
     }
