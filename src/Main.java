@@ -1,3 +1,6 @@
+import AbstractFactory.CardType;
+import AbstractFactory.CreditCard;
+import AbstractFactory.CreditCardFactory;
 import Builder.LunchOrder;
 import Factory.Website;
 import Factory.WebsiteFactory;
@@ -9,7 +12,11 @@ import Prototype.Statement;
 import Singleton.DbSingleton;
 import Singleton.DbSingletonLazy;
 import Singleton.ThreadSafeSingleton;
+import org.w3c.dom.Document;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.ByteArrayInputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -129,7 +136,41 @@ public class Main {
 
         System.out.println(website); // Factory.Shop@4dc63996
 
+        //Abstract Factory Daily Example
 
+        String xml = "<document><body>abcd</body></document>";
+        ByteArrayInputStream bais = new ByteArrayInputStream(xml.getBytes());
+
+
+
+
+        DocumentBuilderFactory abstractFactory = DocumentBuilderFactory.newInstance();
+        //The newInstance() method of Class class can invoke zero-argument constructor whereas
+        // newInstance() method of Constructor class can invoke any number of arguments.
+
+        DocumentBuilder factory =null;
+
+        try {
+            factory = abstractFactory.newDocumentBuilder();
+            Document document = factory.parse(bais);
+            document.getDocumentElement().normalize();
+            System.out.println("Root :"+ document.getDocumentElement().getNodeName());
+            System.out.println(abstractFactory.getClass());
+            System.out.println(factory.getClass());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Abstract factory example
+
+        CreditCardFactory creditCardFactory = CreditCardFactory.getCreditCardFactory(700);
+        CreditCard creditCard = creditCardFactory.getCreditCard(CardType.PLATUNUM);
+
+        System.out.println(creditCard.getClass());
+
+        creditCardFactory = CreditCardFactory.getCreditCardFactory(600);
+        CreditCard creditCard1 = creditCardFactory.getCreditCard(CardType.GOLD);
+        System.out.println(creditCard1.getClass());
 
 
     }
