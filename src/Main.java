@@ -1,4 +1,7 @@
 import Builder.LunchOrder;
+import Factory.Website;
+import Factory.WebsiteFactory;
+import Factory.WebsiteType;
 import Prototype.Movie;
 import Prototype.Record;
 import Prototype.Registery;
@@ -8,6 +11,7 @@ import Singleton.DbSingletonLazy;
 import Singleton.ThreadSafeSingleton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Main {
@@ -103,6 +107,27 @@ public class Main {
 
         System.out.println(movie1);
         System.out.println(movie1.getDuration());
+
+
+        //Calender class using factory pattern
+
+        Calendar calendar = Calendar.getInstance();
+        //getInstance is the static method often used with the Singleton Pattern in Java.
+        // In the context of an abstract class, a getInstance() method may represent the factory method pattern(in
+        // case of Calendar ).
+
+        System.out.println(calendar);
+        System.out.println(calendar.get(Calendar.DAY_OF_MONTH));
+
+        //Factory Pattern Demo
+
+        Website website = WebsiteFactory.getWebsite(WebsiteType.BLOG);
+
+        System.out.println(website); // Factory.Blog@355da254
+
+        website = WebsiteFactory.getWebsite(WebsiteType.SHOP);
+
+        System.out.println(website); // Factory.Shop@4dc63996
 
 
 
